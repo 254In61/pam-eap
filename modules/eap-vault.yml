@@ -48,7 +48,7 @@
 
 - name: eap-vault - Add EAP Admin credentials to the vault using vault.sh
   command:
-    cmd: "{{ eap_home }}/bin/vault.sh --keystore {{ eap_vault_key_file }} --keystore-password {{ eap_vault_keystore_password }} --alias {{ eap_vault_alias }} --vault-block rhdm --attribute password --sec-attr {{ eap_admin_pwd }} --enc-dir {{ eap_vault_path }} --iteration 44 --salt {{ eap_vault_salt }}"
+    cmd: "{{ eap_home }}/bin/vault.sh --keystore {{ eap_vault_key_file }} --keystore-password {{ eap_vault_storepass }} --alias {{ eap_vault_alias }} --vault-block rhdm --attribute password --sec-attr {{ eap_admin_pwd }} --enc-dir {{ eap_vault_path }} --iteration 44 --salt {{ eap_vault_salt }}"
   register: creds_add
  
 - debug:
