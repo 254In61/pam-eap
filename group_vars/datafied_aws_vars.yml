@@ -1,6 +1,7 @@
 ---
 # Global variables used across the playbooks
 # Edit this file when sure of the values.
+artifacts_dir: /opt/apps/rhpam/artifacts
 
 #EAP Ports
 jboss_http_port: 8080                 # Http port
@@ -8,6 +9,7 @@ jboss_https_port: 8443                # Https port
 
 # EAP VAULT
 eap_root: /opt/apps/rhpam
+artifacts_dir: "{{ eap_root }}/artifacts"
 eap_home: "{{ eap_root }}/jboss-eap-7.4"
 eap_ver: jboss-eap-7.4
 eap_vault_path: "{{ eap_home }}/vault"
