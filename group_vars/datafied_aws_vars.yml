@@ -42,13 +42,16 @@ kie_server_zip: rhpam-7.13.0-kie-server-ee8.zip
 kie_server_temp: /tmp/kie
 kie_server_admin_user: kie
 kie_server_admin_pwd: kie1234
-rhpam_add_on: rhpam-7.13.0-migration-tool.zip
+
+
+
+# AURORA DB
+db_host: pam-sandbox.cluster-clmjgu4bbu2f.us-west-2.rds.amazonaws.com
+db_host_port: 5432
+db_name: dev_test_db
+rhpam_add_on: rhpam-7.13.0-add-ons.zip
 kie_server_persistent_dialect: "org.hibernate.dialect.PostgreSQLDialect"
 migration_zip: rhpam-7.13.0-migration-tool.zip
 
 
-# Aurora DB
-db_host: pam-sandbox.cluster-clmjgu4bbu2f.us-west-2.rds.amazonaws.com
-db_host_port: 5432
-db_name: dev_test_db
 

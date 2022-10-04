@@ -19,9 +19,6 @@
     path: "{{ kie_server_temp }}"
     state: directory
   
-- name: Install - Stop RHEL services
-  command: "sudo systemctl stop jboss-eap"
-
 - name: install - extract Kie Server zip file into {{ kie_server_temp }}
   command:
     cmd: "sudo unzip -qo {{ artifacts_dir }}/{{ kie_server_zip }} -d {{ kie_server_temp }}"
@@ -48,7 +45,6 @@
   command:
     cmd: "sudo chown jboss -R {{ eap_home }}"
 
-- name: Start RHEL Service
-  command: "sudo systemctl start jboss-eap"
+
 
 
