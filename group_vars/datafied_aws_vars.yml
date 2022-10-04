@@ -9,7 +9,7 @@ eap_vault_storepass: panther@123 # password that is used to authenticate to the 
 eap_vault_keypass: "{{ eap_vault_storepass }}"
 eap_vault_init_password: s0mepassw0rd! # Security Attribute (SEC-ATTR) - The password which is being stored in the password vault. Used to initialize the vault
 eap_vault_salt: 12345678 # The salt value is a random string of eight characters used, together with the iteration count, to encrypt the content of the keystore.Salt has to be exactly 8 characters long
-eap_vault_alias: vault # The alias of the entry encapsulated in the keystore. Comes in handy to edit when testing to avoid Duplicate resource [(\\\"core-service\\\" => \\\"vault\\\")] error
+eap_vault_alias: vault_2 # The alias of the entry encapsulated in the keystore. Comes in handy to edit when testing to avoid Duplicate resource [(\\\"core-service\\\" => \\\"vault\\\")] error
 
 
 #EAP Admin credentials
