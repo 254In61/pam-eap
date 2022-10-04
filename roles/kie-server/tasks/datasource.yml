@@ -20,7 +20,7 @@
     src: datasource.j2
     dest: "{{ kie_server_temp }}/datasource.cli"
   become: true
-  become_user: "{{ eap_svc_user }}"
+  #become_user: "{{ eap_svc_user }}"
 
 - name: datasources - run datasource.cli JBoss configuration to write on standalone-full.xml
-  command: "sudo -u jboss {{ eap_home }}/bin/jboss-cli.sh --file={{ kie_server_temp }}/datasource.cli"
+  command: "sudo -u {{ eap_svc_user }} {{ eap_home }}/bin/jboss-cli.sh --file={{ kie_server_temp }}/datasource.cli"
