@@ -15,12 +15,12 @@
 #   command:
 #     cmd: "PGPASSWORD={{ db_master_password }} psql --host={{ db_host }} --port={{ db_host_port }} --user={{ db_master_username }} --dbname={{ db_name }} < {{ postgred_jbm_schema }}"
 
-- name: datasources - create setup.cli using datasource.j2 template
+- name: datasources - create datasource.cli using datasource.j2 template
   template:
     src: datasource.j2
-    dest: "{{ kie_server_temp }}/setup.cli"
+    dest: "{{ kie_server_temp }}/datasource.cli"
   become: true
   become_user: "{{ eap_svc_user }}"
 
-- name: datasources - run setup.cli JBoss configuration to write on standalone-full.xml
-  command: "sudo -u jboss {{ eap_home }}/bin/jboss-cli.sh --file={{ kie_server_temp }}/setup.cli"
+- name: datasources - run datasource.cli JBoss configuration to write on standalone-full.xml
+  command: "sudo -u jboss {{ eap_home }}/bin/jboss-cli.sh --file={{ kie_server_temp }}/datasource.cli"

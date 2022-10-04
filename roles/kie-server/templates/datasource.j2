@@ -1,54 +1,54 @@
 embed-server --server-config=standalone-full.xml
     if (outcome != "success") of /system-property=org.kie.server.repo:read-resource
-        /system-property=org.kie.server.repo:add(value={{ org_kie_server_repo }})
+        /system-property=org.kie.server.repo:add(value="{{ org_kie_server_repo }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.example:read-resource
-        /system-property=org.kie.example:add(value={{ org_kie_example }})
+        /system-property=org.kie.example:add(value="{{ org_kie_example }}")
     end-if
 
     if (outcome != "success") of /system-property=org.jbpm.designer.perspective:read-resource
-        /system-property=org.jbpm.designer.perspective:add(value={{ org_jbpm_designer_perspective }})
+        /system-property=org.jbpm.designer.perspective:add(value="{{ org_jbpm_designer_perspective }}")
     end-if
 
     if (outcome != "success") of /system-property=designerdataobjects:read-resource
-        /system-property=designerdataobjects:add(value={{ designerdataobjects }})
+        /system-property=designerdataobjects:add(value="{{ designerdataobjects }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.user:read-resource
-        /system-property=org.kie.server.user:add(value={{ org_kie_server_user }})
+        /system-property=org.kie.server.user:add(value="{{ org_kie_server_user }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.pwd:read-resource
-        /system-property=org.kie.server.pwd:add(value={{ org_kie_server_pwd }})
+        /system-property=org.kie.server.pwd:add(value="{{ org_kie_server_pwd }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.location:read-resource
-        /system-property=org.kie.server.location:add(value={{ org_kie_server_location }})
+        /system-property=org.kie.server.location:add(value="{{ org_kie_server_location }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.controller:read-resource
-        /system-property=org.kie.server.controller:add(value={{ org_kie_server_controller }})
+        /system-property=org.kie.server.controller:add(value="{{ org_kie_server_controller }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.controller.user:read-resource
-        /system-property=org.kie.server.controller.user:add(value={{ org_kie_server_controller_user }})
+        /system-property=org.kie.server.controller.user:add(value="{{ org_kie_server_controller_user }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.controller.pwd:read-resource
-        /system-property=org.kie.server.controller.pwd:add(value={{ org_kie_server_controller_pwd }})
+        /system-property=org.kie.server.controller.pwd:add(value="{{ org_kie_server_controller_pwd }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.id.pwd:read-resource
-        /system-property=org.kie.server.id:add(value={{ org_kie_server_id }})
+        /system-property=org.kie.server.id:add(value="{{ org_kie_server_id }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.persistence.ds:read-resource
-        /system-property=org.kie.server.persistence.ds:add(value={{ org_kie_server_persistence_ds }})
+        /system-property=org.kie.server.persistence.ds:add(value="{{ org_kie_server_persistence_ds }}")
     end-if
 
     if (outcome != "success") of /system-property=org.kie.server.persistence.dialect:read-resource
-        /system-property=org.kie.server.persistence.dialect:add(value={{ org_kie_server_persistence_dialect }})
+        /system-property=org.kie.server.persistence.dialect:add(value="{{ org_kie_server_persistence_dialect }}")
     end-if
 
 stop-embedded-server
