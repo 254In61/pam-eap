@@ -1,12 +1,12 @@
 ---
 # EAP Vault installation
-- name: eap-vault - Remove older vault directory
-  command:
-    cmd: "sudo rm -rf $EAP_HOME/vault && sudo mkdir $EAP_HOME/vault"
+# - name: eap-vault - Remove older vault directory
+#   command:
+#     cmd: "sudo rm -rf $EAP_HOME/vault && sudo mkdir $EAP_HOME/vault"
 
-- name: eap-vault - Change Ownership to Jboss
-  command:
-    cmd: "sudo chown jboss -R $EAP_HOME/vault && sudo chown jboss -R $EAP_HOME/vault"
+# - name: eap-vault - Change Ownership to Jboss
+#   command:
+#     cmd: "sudo chown jboss -R $EAP_HOME/vault && sudo chown jboss -R $EAP_HOME/vault"
 
 - name: eap-vault - Generate a keystore - Run the keytool command
   command:
