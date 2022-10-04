@@ -3,8 +3,9 @@
 # Edit this file when sure of the values.
 
 # EAP VAULT
-eap_vault_path: /opt/apps/rhpam/jboss-eap-7.4/vault
-eap_vault_key_file: /opt/apps/rhpam/jboss-eap-7.4/vault/vault.keystore
+eap_home: /opt/apps/rhpam/jboss-eap-7.4
+eap_vault_path: "{{ eap_home }}/vault"
+eap_vault_key_file: "{{ eap_home }}/vault/vault.keystore"
 eap_vault_storepass: panther@123 # password that is used to authenticate to the keystore so that the key can be read.The password must be at least 6 characters long
 eap_vault_keypass: "{{ eap_vault_storepass }}"
 eap_vault_init_password: s0mepassw0rd! # Security Attribute (SEC-ATTR) - The password which is being stored in the password vault. Used to initialize the vault
