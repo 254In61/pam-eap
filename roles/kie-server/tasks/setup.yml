@@ -1,0 +1,42 @@
+# Tasks for configuring Maven settings.
+# More details on the Maven set-up : https://www.baeldung.com/maven-settings-xml
+# Logic steps
+# 1) Create place holder or data directory to hold the data.
+# 2) Create a settings.xml file which is the POM file for Maven.
+# 3) Using settings-xml.j2 template, feed into a settings.xml file stored in the created directory.
+# 4) Using maven-setup-cli.j2 template write on a tmp maven-setup.cli file.
+# 5) Use the maven-setup.cli file as input file to jboss-cli.sh , and write the standalone-full.xml file.
+
+- name: setup - create maven data directory {{ maven_data_directory }}
+  file:
+    path: "{{ maven_data_directory }}"
+    state: directory
+  ignore_errors: yes
+
+- name: setup - create maven settings file at {{ maven_settings_xml_path }}
+  file:
+    path: "{{ maven_settings_xml_path }}"
+    state: touch
+  ignore_errors: yes
+
+- name: setup - create {{ maven_settings_xml_path }}
+  template:
+    src: settings-xml.j2
+    dest: "{{ maven_settings_xml_path }}"
+  ignore_errors: yes
+
+- name: setup - Write maven settings on the {{ maven_settings_xml_path }} file using settings-xml.j2 file
+  template:
+    src: settings-xml.j2
+    dest: "{{ maven_settings_xml_path }}"
+  ignore_errors: yes
+
+- name: setup - create setup.cli
+  template:
+    src: setup-cli.j2
+    dest: "{{ business_central_temp }}/setup.cli"
+  ignore_errors: yes
+
+- name: setup - run setup.cli JBoss configuration to append to settings-full.xml the path to settings.xml file
+  command: "{{ eap_home }}/bin/jboss-cli.sh --file={{ business_central_temp }}/setup.cli"
+  ignore_errors: yes

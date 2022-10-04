@@ -43,3 +43,11 @@ business_central_controller_pwd: kie1234
 # +++ MAVEN +++ 
 maven_data_directory: "{{ eap_root }}/data"
 maven_settings_xml_path: "{{ maven_data_directory }}/settings.xml"
+
+
+# +++ KIE SERVER +++++
+
+kie_server_zip: rhpam-7.13.0-kie-server-ee8.zip
+kie_server_temp: /tmp/kie
+kie_server_admin_user: kie
+kie_server_admin_pwd: kie1234

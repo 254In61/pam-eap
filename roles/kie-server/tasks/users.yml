@@ -1,0 +1,5 @@
+---
+# Adding users to Kie server
+
+- name: Configure user on kie server with kie-server role.
+  command: "{{ eap_home }}/bin/add-user.sh -a --user {{ kie_server_admin_user }} --password {{ kie_server_admin_pwd }} --role admin,kie-server,rest-all"

@@ -1,0 +1,51 @@
+---
+# Installation of the Business Central 
+# - name: install -  download  {{ rhdm_central_artifact_name }}
+#   get_url:
+#     url: "{{ artifact_source }}/{{ rhdm_central_artifact_name }}"
+#     dest: "{{ rhdm_central_temp }}/{{ rhdm_central_artifact_name}}"
+#     force_basic_auth: yes
+#     username: "{{ artifact_source_user }}"
+#     password: "{{ artifact_source_pwd }}" # To come from the Hashicorp vault
+#   register: download
+#   failed_when:
+#     - download["failed"] != false
+#     - download["status_code"] != 200
+#   ignore_errors: yes
+
+
+- name: Install - Create {{ kie_server_temp }} for temporary unzipped files
+  file:
+    path: "{{ kie_server_temp }}"
+    state: directory
+  
+
+- name: install - extract Kie Server zip file into {{ kie_server_temp }}
+  command:
+    cmd: "sudo unzip -qo {{ artifacts_dir }}/{{ kie_server_zip }} -d {{ kie_server_temp }}"
+
+
+# copy the SecurityPolicy file to respective JBOSS EAP server’s bin folder
+- name: install - copy SecurityPolicy to {{ eap_home }}/bin/
+  command:
+    cmd: "sudo -u jboss cp -rf {{ kie_server_tmp }}/SecurityPolicy {{ eap_home }}/bin/"
+
+
+# Copy the .war file to the deployments folder of respective application server
+- name: install - copy kie-server.war to {{ jboss_eap_home }}/standalone/deployments/
+  command:
+    cmd: "sudo -u jboss cp -rf {{ kie_server_tmp }}/kie-server.war {{ eap_home }}/standalone/deployments/"
+
+
+- name: install - create kie-server.war.dodeploy
+  file:
+    path: "{{ eap_home }}/standalone/deployments/kie-server.war.dodeploy"
+    state: touch
+
+- name: Ensure ownership by jboss
+  command:
+    cmd: "sudo chown jboss -R {{ eap_home }}"
+
+
+
+
