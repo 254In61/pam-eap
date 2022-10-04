@@ -1,12 +1,12 @@
 ---
 # EAP Vault installation
-- name: eap-vault - Create vault directory
-  command:
-    cmd: "sudo mkdir {{ eap_home }}/vault"
+# - name: eap-vault - Create vault directory
+#   command:
+#     cmd: "sudo mkdir {{ eap_home }}/vault"
 
-- name: eap-vault - Change Ownership to Jboss
-  command:
-    cmd: "sudo chown jboss -R {{ eap_home }}/vault && sudo chown jboss -R {{ eap_home }}/vault"
+# - name: eap-vault - Change Ownership to Jboss
+#   command:
+#     cmd: "sudo chown jboss -R {{ eap_home }}/vault && sudo chown jboss -R {{ eap_home }}/vault"
 
 - name: eap-vault - Generate a keystore - Run the keytool command
   command:
