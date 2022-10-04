@@ -1,7 +1,6 @@
 ---
 # Global variables used across the playbooks
 # Edit this file when sure of the values.
-artifacts_dir: /opt/apps/rhpam/artifacts
 
 #EAP Ports
 jboss_http_port: 8080                 # Http port
@@ -36,7 +35,7 @@ business_central_temp: /tmp/bc
 business_central_data: "{{ eap_root }}/data"
 business_central_admin_usr: dadmin # Client to provide
 business_central_admin_pwd: dadmin # Passwords to come from Hashivault
-#business_central_maven_jboss_enterprise_repo_url: https://maven.repository.redhat.com/ga/
+maven_enterprise_repo_url: https://maven.repository.redhat.com/ga/
 business_central_controller_usr: kie
 business_central_controller_pwd: kie1234
 
