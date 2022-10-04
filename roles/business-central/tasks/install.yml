@@ -21,7 +21,7 @@
 
 - name: install - extract RHDM Central into {{ business_central_temp }}
   command:
-    cmd: "sudo unzip -q {{ artifacts_dir }}/{{ business_central_zip }} -d {{ business_central_temp }}"
+    cmd: "sudo unzip -qo {{ artifacts_dir }}/{{ business_central_zip }} -d {{ business_central_temp }}"
   
  
 - name: install - remove extracted standalone-full.xml to avoid overwrite
