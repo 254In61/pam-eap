@@ -1,8 +1,8 @@
 ---
 # EAP Vault installation
-- name: eap-vault - Remove older vault directory
+- name: eap-vault - Create vault directory
   command:
-    cmd: "sudo rm -rf {{ eap_home }}/vault && sudo mkdir {{ eap_home }}/vault"
+    cmd: "sudo mkdir {{ eap_home }}/vault"
 
 - name: eap-vault - Change Ownership to Jboss
   command:
