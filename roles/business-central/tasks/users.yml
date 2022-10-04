@@ -1,0 +1,8 @@
+---
+# Adding users to decision central
+
+- name: add admin user {{ business_central_admin_usr }}
+  command: "{{ eap_home }}/bin/add-user.sh -a --user {{ business_central_admin_usr }} --password {{ business_central_admin_pwd }} --role admin"
+
+- name: add controller user {{ business_central_controller_usr }}
+  command: "{{ eap_home }}/bin/add-user.sh -a --user {{ business_central_controller_usr }} --password {{ business_central_controller_pwd }} --role rest-all"

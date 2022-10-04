@@ -1,0 +1,39 @@
+---
+# Installation of the Business Central 
+# - name: install -  download  {{ rhdm_central_artifact_name }}
+#   get_url:
+#     url: "{{ artifact_source }}/{{ rhdm_central_artifact_name }}"
+#     dest: "{{ rhdm_central_temp }}/{{ rhdm_central_artifact_name}}"
+#     force_basic_auth: yes
+#     username: "{{ artifact_source_user }}"
+#     password: "{{ artifact_source_pwd }}" # To come from the Hashicorp vault
+#   register: download
+#   failed_when:
+#     - download["failed"] != false
+#     - download["status_code"] != 200
+#   ignore_errors: yes
+
+- name: main - Create {{ business_central_temp }} for temporary unzipped files
+  file:
+    path: /tmp/bc
+    state: directory
+  
+
+- name: install - extract RHDM Central into {{ business_central_temp }}
+  unarchive:
+    src: "artifacts/{{ business_central_zip }}"
+    dest: "{{ business_central_temp }}"
+  ignore_errors: yes
+
+- name: install - remove extracted standalone-full.xml to avoid overwrite
+  file:
+    path: "{{ business_central_temp }}/{{ eap_ver }}/standalone/configuration/standalone-full.xml"
+    state: absent
+  ignore_errors: yes
+
+- name: install - install RHDM Central files on {{ eap_home }}
+  command:
+    cmd: "cp -rf {{ business_central_temp }}/{{ eap_ver }}/. {{ eap_home }}/"
+    creates: "{{ eap_home }}/standalone/deployments/business-central.war.dodeploy"
+  ignore_errors: yes
+

@@ -1,0 +1,21 @@
+---
+  # expected that the ansible_user has sudo privileges on the servers.
+  # Code will run as root on the remote hosts.
+ 
+- name: Install PAM
+  hosts: localhost 
+  become: yes   
+  
+  tasks:
+    - name: Include vars
+      include_vars:
+        dir: group_vars
+        
+    - import_role: 
+        name: business-central
+
+  # post_tasks:
+    #- debug:
+       # msg:
+         # - "Service user : {{ jboss_service_user }}"
+         # - "Installation dir : {{ rhdm_apps_directory }}"
