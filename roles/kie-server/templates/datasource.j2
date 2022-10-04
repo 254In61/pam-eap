@@ -1,10 +1,10 @@
 embed-server --server-config=standalone-full.xml
     if (outcome != "success") of /system-property=org.kie.server.repo:read-resource
-        /system-property=org.kie.server.repo:add(value={{ org_kie_server_repo }})
+        /system-property=org.kie.server.repo:add(value={{ org.kie.server.repo }})
     end-if
 
     if (outcome != "success") of /system-property=org.kie.example:read-resource
-        /system-property=org.kie.example:add(value={{ org_kie_example }})
+        /system-property=org.kie.example:add(value={{ org.kie.example }})
     end-if
 
     if (outcome != "success") of /system-property=org.jbpm.designer.perspective:read-resource
