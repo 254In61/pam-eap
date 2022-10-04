@@ -30,13 +30,13 @@
 # copy the SecurityPolicy file to respective JBOSS EAP server’s bin folder
 - name: install - copy SecurityPolicy to {{ eap_home }}/bin/
   command:
-    cmd: "sudo -u jboss cp -rf {{ kie_server_tmp }}/SecurityPolicy {{ eap_home }}/bin/"
+    cmd: "sudo -u jboss cp -rf {{ kie_server_temp }}/SecurityPolicy {{ eap_home }}/bin/"
 
 
 # Copy the .war file to the deployments folder of respective application server
 - name: install - copy kie-server.war to {{ jboss_eap_home }}/standalone/deployments/
   command:
-    cmd: "sudo -u jboss cp -rf {{ kie_server_tmp }}/kie-server.war {{ eap_home }}/standalone/deployments/"
+    cmd: "sudo -u jboss cp -rf {{ kie_server_temp }}/kie-server.war {{ eap_home }}/standalone/deployments/"
 
 
 - name: install - create kie-server.war.dodeploy
