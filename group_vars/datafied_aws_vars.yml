@@ -52,6 +52,6 @@ db_name: dev_test_db
 rhpam_add_on: rhpam-7.13.0-add-ons.zip
 kie_server_persistent_dialect: "org.hibernate.dialect.PostgreSQLDialect"
 migration_zip: rhpam-7.13.0-migration-tool.zip
-
+postgred_jbm_schema: "{{ kie_server_temp }}/rhpam-7.13.0-migration-tool/ddl-scripts/postgresql/postgresql-jbpm-schema.sql"
 
 
