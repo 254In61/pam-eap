@@ -34,9 +34,9 @@
 - name: setup - create setup.cli
   template:
     src: setup-cli.j2
-    dest: "{{ business_central_temp }}/setup.cli"
+    dest: "{{ kie_server_temp }}/setup.cli"
   ignore_errors: yes
 
 - name: setup - run setup.cli JBoss configuration to append to settings-full.xml the path to settings.xml file
-  command: "{{ eap_home }}/bin/jboss-cli.sh --file={{ business_central_temp }}/setup.cli"
+  command: "{{ eap_home }}/bin/jboss-cli.sh --file={{ kie_server_temp }}/setup.cli"
   ignore_errors: yes
