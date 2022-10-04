@@ -20,11 +20,10 @@
   
 
 - name: install - extract RHDM Central into {{ business_central_temp }}
-  unarchive:
-    src: "artifacts/{{ business_central_zip }}"
-    dest: "{{ business_central_temp }}"
-  ignore_errors: yes
-
+  command:
+    cmd: "sudo unzip -q artifacts/{{ business_central_zip }} -d {{ business_central_temp }}"
+  
+ 
 - name: install - remove extracted standalone-full.xml to avoid overwrite
   file:
     path: "{{ business_central_temp }}/{{ eap_ver }}/standalone/configuration/standalone-full.xml"
