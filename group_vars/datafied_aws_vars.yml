@@ -43,7 +43,7 @@ kie_server_admin_pwd: kie1234
 
 
 # AURORA DB
-db_host: pam-sandbox.cluster-clmjgu4bbu2f.us-west-2.rds.amazonaws.com
+db_host: aurpgr-sandbbox-order-workflow.cluster-clmjgu4bbu2f.us-west-2.rds.amazonaws.com
 db_host_port: 5432
 db_name: dev_test_db
 rhpam_add_on: rhpam-7.13.0-add-ons.zip

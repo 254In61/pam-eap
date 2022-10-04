@@ -1,16 +1,16 @@
 ---
 # Main tasks
-# - name: main - Install - Stop RHEL services
-#   command: "sudo systemctl stop jboss-eap"
+- name: main - Install - Stop RHEL services
+  command: "sudo systemctl stop jboss-eap"
 
-# - import_tasks: install.yml
+- import_tasks: install.yml
 
-# - name: main - Start RHEL Service
-#   command: "sudo systemctl start jboss-eap"
+- name: main - Start RHEL Service
+  command: "sudo systemctl start jboss-eap"
 
-# - import_tasks: users.yml
+- import_tasks: users.yml
 
-# - import_tasks: setup.yml
+- import_tasks: setup.yml
 
 - import_tasks: datasource.yml # Need a smarter way to write the .xml file than copying whole of it.
 
