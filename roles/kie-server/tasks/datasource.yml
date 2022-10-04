@@ -11,9 +11,9 @@
     cmd: "sudo unzip -qo {{ kie_server_temp }}/{{ migration_zip }}"
 
 
-- name: datasource - Import the DDL script for your database type into the database
-  command:
-    cmd: "PGPASSWORD={{ db_master_password }} psql --host={{ db_host }} --port={{ db_host_port }} --user={{ db_master_username }} --dbname={{ db_name }} < {{ postgred_jbm_schema }}"
+# - name: datasource - Import the DDL script for your database type into the database
+#   command:
+#     cmd: "PGPASSWORD={{ db_master_password }} psql --host={{ db_host }} --port={{ db_host_port }} --user={{ db_master_username }} --dbname={{ db_name }} < {{ postgred_jbm_schema }}"
 
 
 - name: datasources - create setup.cli using datasource.j2 template
