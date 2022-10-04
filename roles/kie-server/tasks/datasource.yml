@@ -14,9 +14,9 @@
   command:
     cmd: "PGPASSWORD={{ master_password }} psql --host={{ db_host }} --port={{ db_host_port }} --user={{ master username }} --dbname={{ db_name }} < /tmp/kie/rhpam-7.13.0-migration-tool/ddl-scripts/postgresql/postgresql-jbpm-schema.sql"
 
-- name: datasources - create setup.cli
+- name: datasources - create setup.cli using datasource.j2 template
   template:
-    src: setup_cli.j2
+    src: datasource.j2
     dest: "{{ kie_server_temp }}/setup.cli"
 
 - name: datasources - run setup.cli JBoss configuration to write on standalone-full.xml
