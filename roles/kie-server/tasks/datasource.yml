@@ -1,0 +1,23 @@
+---
+# Configuring Data Sources
+# REF: https://access.redhat.com/documentation/en-us/red_hat_process_automation_manager/7.13/html/installing_and_configuring_red_hat_process_automation_manager/assembly_installing-on-eap-deployable_install-on-eap#doc-wrapper
+
+- name: datasources - Extract rhpam-7.13.0-add-ons.zip in a temporary directory
+  command:
+    cmd: "sudo unzip -qo {{ artifacts_dir }}/{{ rhpam_add_on }} -d {{ kie_server_temp }}"
+
+- name: datasources - Extract TEMP_DIR/rhpam-7.13.0-migration-tool.zip.
+  command:
+    cmd: "sudo unzip -qo {{ kie_server_temp }}/{{ migration_zip }}"
+
+- name: datasource - Import the DDL script for your database type into the database
+  command:
+    cmd: "PGPASSWORD={{ master_password }} psql --host={{ db_host }} --port={{ db_host_port }} --user={{ master username }} --dbname={{ db_name }} < /tmp/kie/rhpam-7.13.0-migration-tool/ddl-scripts/postgresql/postgresql-jbpm-schema.sql"
+
+- name: datasources - create setup.cli
+  template:
+    src: setup_cli.j2
+    dest: "{{ kie_server_temp }}/setup.cli"
+
+- name: datasources - run setup.cli JBoss configuration to write on standalone-full.xml
+  command: "sudo -u jboss {{ eap_home }}/bin/jboss-cli.sh --file={{ kie_server_temp }}/setup.cli"

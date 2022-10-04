@@ -6,3 +6,9 @@
 
 - import_tasks: setup.yml
 
+- import_tasks: datasource.yml # Need a smarter way to write the .xml file than copying whole of it.
+
+- import_tasks: vault.yml # Should always come last.
+
+- import_tasks: testing.yml
+

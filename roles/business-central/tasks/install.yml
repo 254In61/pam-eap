@@ -13,9 +13,8 @@
 #     - download["status_code"] != 200
 #   ignore_errors: yes
 
-- name: Install Change Login name
-  command:
-    cmd: 
+- name: Install - Stop RHEL services
+  command: "sudo systemctl stop jboss-eap"
 
 - name: Install - Create {{ business_central_temp }} for temporary unzipped files
   file:
@@ -39,4 +38,12 @@
     cmd: "cp -rf {{ business_central_temp }}/{{ eap_ver }}/. {{ eap_home }}/"
     creates: "{{ eap_home }}/standalone/deployments/business-central.war.dodeploy"
   ignore_errors: yes
+
+- name: Ensure ownership by jboss
+  command:
+    cmd: "sudo chown jboss -R {{ eap_home }}"
+
+# - name: Start RHEL Service
+#   command: "sudo systemctl start jboss-eap"
+
 

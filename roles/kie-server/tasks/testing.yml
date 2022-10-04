@@ -1,0 +1,17 @@
+---
+# Run tests
+
+- name: testing - Confirm EAP Page
+  command: "curl -I http://localhost:8080/"
+  register: curl_test
+
+- debug:
+    var: curl_test["stdout_lines"]
+
+- name: testing - Confirm kie API using GET
+  command: "wget --user={{ kie_server_admin_user }} --password='{{ kie_server_admin_pwd }}' http://localhost:8080/kie-server/services/rest/server"
+  register: get_test
+
+- debug:
+    var: get_test["stdout_lines"]
+  

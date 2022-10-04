@@ -13,16 +13,10 @@ eap_home: "{{ eap_root }}/jboss-eap-7.4"
 eap_ver: jboss-eap-7.4
 eap_vault_path: "{{ eap_home }}/vault"
 eap_vault_key_file: "{{ eap_home }}/vault/vault.keystore"
-eap_vault_storepass: panther@123 # password that is used to authenticate to the keystore so that the key can be read.The password must be at least 6 characters long
-eap_vault_keypass: "{{ eap_vault_storepass }}"
-eap_vault_init_password: s0mepassw0rd! # Security Attribute (SEC-ATTR) - The password which is being stored in the password vault. Used to initialize the vault
-eap_vault_salt: 12345678 # The salt value is a random string of eight characters used, together with the iteration count, to encrypt the content of the keystore.Salt has to be exactly 8 characters long
 eap_vault_alias: vault # The alias of the entry encapsulated in the keystore. Comes in handy to edit when testing to avoid Duplicate resource [(\\\"core-service\\\" => \\\"vault\\\")] error
 
 
-#EAP Admin credentials
-eap_admin_user: eapAdmin
-eap_admin_pwd: Admin@123
+
 
 # ++ SERVICE USER +++
 eap_svc_user: jboss  # Service User within the RHEL system.
@@ -33,11 +27,8 @@ eap_svc_user: jboss  # Service User within the RHEL system.
 business_central_zip: rhpam-7.13.0-business-central-eap7-deployable.zip
 business_central_temp: /tmp/bc
 business_central_data: "{{ eap_root }}/data"
-business_central_admin_usr: dadmin # Client to provide
-business_central_admin_pwd: dadmin # Passwords to come from Hashivault
 maven_enterprise_repo_url: https://maven.repository.redhat.com/ga/
-business_central_controller_usr: kie
-business_central_controller_pwd: kie1234
+business_central_address:  ip-10-0-158-133.us-west-2.compute.internal
 
 
 # +++ MAVEN +++ 
@@ -46,8 +37,18 @@ maven_settings_xml_path: "{{ maven_data_directory }}/settings.xml"
 
 
 # +++ KIE SERVER +++++
-
+kie_server_address: ip-10-0-157-227.us-west-2.compute.internal
 kie_server_zip: rhpam-7.13.0-kie-server-ee8.zip
 kie_server_temp: /tmp/kie
 kie_server_admin_user: kie
 kie_server_admin_pwd: kie1234
+rhpam_add_on: rhpam-7.13.0-migration-tool.zip
+kie_server_persistent_dialect: "org.hibernate.dialect.PostgreSQLDialect"
+migration_zip: rhpam-7.13.0-migration-tool.zip
+
+
+# Aurora DB
+db_host: pam-sandbox.cluster-clmjgu4bbu2f.us-west-2.rds.amazonaws.com
+db_host_port: 5432
+db_name: dev_test_db
+
