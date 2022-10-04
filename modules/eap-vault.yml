@@ -1,0 +1,48 @@
+---
+# EAP Vault installation
+- name: eap-vault - Remove older vault directory
+  command:
+    cmd: "sudo rm -rf $EAP_HOME/vault && sudo mkdir $EAP_HOME/vault"
+
+- name: eap-vault - Change Ownership to Jboss
+  command:
+    cmd: "sudo chown jboss -R $EAP_HOME/vault && sudo chown jboss -R $EAP_HOME/vault"
+
+- name: eap-vault - Generate a keystore - Run the keytool command
+  command:
+    cmd: "keytool -genseckey -alias {{ eap_vault_alias }} -storetype jceks -keyalg AES -keysize 128 -storepass {{ eap_vault_storepass }} -keypass {{ eap_vault_keypass }} -validity 730 -keystore {{ eap_vault_key_file }}"
+
+# Run the vault script. 
+# The script will generate the masked password and the values to configure in the standalone.xml file.
+# https://docs.microfocus.com/itom/Codar:1.94/Configuration/MgmtConsole_Mask_Vault_Config
+
+- name: eap-vault - Initialize the Password Vault
+  command: 
+    cmd: "$EAP_HOME/bin/vault.sh --keystore {{ eap_vault_key_file }} --keystore-password {{ eap_vault_storepass }} --alias {{ eap_vault_alias }} --vault-block rhdm --attribute password --sec-attr {{ eap_vault_init_password }} --enc-dir {{ eap_vault_path }} --iteration 44 --salt {{ eap_vault_salt }}"
+
+- debug:
+    msg: "2nd part of command = {{ item }}"
+  when:
+    - "'core-service=vault:add(vault-options=' in item" # Choose item on the list
+    - "'host=the_host' not in item"  # Ensure doesn't pick 'for domain mode'
+  loop: '{{ initialize_vault["stdout_lines"] }}'
+
+# This adds configuration to standalonefull.xml under <vault>  ...... </vault>
+# Has an error, WFLYCTL0212: Duplicate resource [(\\\"core-service\\\" => \\\"vault\\\")]\ once already done
+
+- name: eap-vault - Configure JBoss EAP to use the vault using jboss-cli.sh[ Ignore errors if core-service vault already configured ]
+  command: 
+    cmd: "$EAP_HOME/bin/jboss-cli.sh -c --controller=localhost:9990  '{{ item }}'"
+  when:
+    - "'core-service=vault:add(vault-options=' in item" # Choose item on the list
+    - "'host=the_host' not in item"  # Ensure doesn't pick 'for domain mode'
+  loop: '{{ initialize_vault["stdout_lines"] }}'
+  ignore_errors: yes
+
+- name: eap-vault - Add EAP Admin credentials to the vault using vault.sh
+  command:
+    cmd: "{{ JBOSS_HOME }}/bin/vault.sh --keystore {{ eap_vault_key_file }} --keystore-password {{ eap_vault_keystore_password }} --alias {{ eap_vault_alias }} --vault-block rhdm --attribute password --sec-attr {{ eap_admin_pwd }} --enc-dir {{ eap_vault_path }} --iteration 44 --salt {{ eap_vault_salt }}"
+  register: creds_add
+ 
+- debug:
+    var: creds_add["stdout_lines"]
